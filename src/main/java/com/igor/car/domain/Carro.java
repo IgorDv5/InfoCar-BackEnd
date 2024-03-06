@@ -20,7 +20,7 @@ public class Carro implements Serializable {
 	private int anoFabricacao;
 	
 	@Column(unique = true) //Anotacao Para Informar que variavel é unica no banco
-	private String Chassi;
+	private String chassi;
 	private String cavalaria;
 	
 	@Column(unique = true) //Anotacao Para Informar que variavel é unica no banco
@@ -30,16 +30,21 @@ public class Carro implements Serializable {
 		super();
 	}
 
-	public Carro(Integer id, String marca, String modelo, int anoFabricacao, String chassi, String cavalaria,String placa) {
+	
+
+	public Carro(Integer id, String marca, String modelo, int anoFabricacao, String chassi, String cavalaria,
+			String placa) {
 		super();
 		this.id = id;
 		this.marca = marca;
 		this.modelo = modelo;
 		this.anoFabricacao = anoFabricacao;
-		Chassi = chassi;
+		this.chassi = chassi;
 		this.cavalaria = cavalaria;
 		this.placa = placa;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -73,13 +78,25 @@ public class Carro implements Serializable {
 		this.anoFabricacao = anoFabricacao;
 	}
 
+
+
 	public String getChassi() {
-		return Chassi;
+		return chassi;
 	}
 
+
+
 	public void setChassi(String chassi) {
-		Chassi = chassi;
+		this.chassi = chassi;
 	}
+
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
 
 	public String getCavalaria() {
 		return cavalaria;
