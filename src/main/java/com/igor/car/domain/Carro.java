@@ -2,6 +2,7 @@ package com.igor.car.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,14 +18,19 @@ public class Carro implements Serializable {
 	private String marca;
 	private String modelo;
 	private int anoFabricacao;
+	
+	@Column(unique = true) //Anotacao Para Informar que variavel é unica no banco
 	private String Chassi;
 	private String cavalaria;
+	
+	@Column(unique = true) //Anotacao Para Informar que variavel é unica no banco
+	private String placa;
 	
 	public Carro() {
 		super();
 	}
 
-	public Carro(Integer id, String marca, String modelo, int anoFabricacao, String chassi, String cavalaria) {
+	public Carro(Integer id, String marca, String modelo, int anoFabricacao, String chassi, String cavalaria,String placa) {
 		super();
 		this.id = id;
 		this.marca = marca;
@@ -32,6 +38,7 @@ public class Carro implements Serializable {
 		this.anoFabricacao = anoFabricacao;
 		Chassi = chassi;
 		this.cavalaria = cavalaria;
+		this.placa = placa;
 	}
 
 	public Integer getId() {
@@ -81,6 +88,15 @@ public class Carro implements Serializable {
 	public void setCavalaria(String cavalaria) {
 		this.cavalaria = cavalaria;
 	}
+	
+	public String getPlaca() {
+		return placa;
+	}
+
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}
+
 	
 	
 }
