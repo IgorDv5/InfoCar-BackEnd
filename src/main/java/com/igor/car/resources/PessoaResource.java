@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.igor.car.domain.Pessoa;
+import com.igor.car.domain.dtos.PessoaDTO;
 import com.igor.car.services.PessoaService;
 
 @RestController
@@ -18,9 +19,9 @@ public class PessoaResource {
 	private PessoaService service;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Pessoa> findById(@PathVariable Integer id){
+	public ResponseEntity<PessoaDTO> findById(@PathVariable Integer id){
 		Pessoa obj = this.service.findById(id);
-		return ResponseEntity.ok().body(obj); 
+		return ResponseEntity.ok().body(new PessoaDTO(obj)); 
 	}
 	
 
