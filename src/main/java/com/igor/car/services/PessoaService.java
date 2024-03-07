@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.igor.car.domain.Pessoa;
 import com.igor.car.domain.dtos.PessoaDTO;
 import com.igor.car.repositories.PessoaRepository;
+import com.igor.car.services.exceptions.DataIntegrityViolationException;
 import com.igor.car.services.exceptions.ObjectNotFoundException;
 
 
@@ -29,9 +30,24 @@ public class PessoaService {
 	}
 
 	public Pessoa create(PessoaDTO objDTO) {
-		objDTO.setId(null); 
+		objDTO.setId(null);
+		validaPorCpfeEmail(objDTO);
 		Pessoa newObj = new Pessoa(objDTO); 
 		return repository.save(newObj);
+	}
+
+	private void validaPorCpfeEmail(PessoaDTO objDTO) {
+		Optional<Pessoa> obj = repository.findByCpf(objDTO.getCpf());
+			if(obj.isPresent() && obj.get().getId() != objDTO.getId()) {
+				throw new DataIntegrityViolationException("CPF já Cadastrado no Sistema!");
+			}
+			
+			obj = repository.findByEmail(objDTO.getEmail());
+			if(obj.isPresent() && obj.get().getId() != objDTO.getId()) {
+				throw new DataIntegrityViolationException("EMAIL já Cadastrado no Sistema!");
+			}
+			
+
 	}
 
 
