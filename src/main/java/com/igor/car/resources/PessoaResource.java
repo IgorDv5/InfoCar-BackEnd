@@ -1,5 +1,8 @@
 package com.igor.car.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.igor.car.domain.Pessoa;
 import com.igor.car.domain.dtos.PessoaDTO;
 import com.igor.car.services.PessoaService;
+
 
 @RestController
 @RequestMapping(value = "/usuarios")
@@ -23,6 +27,12 @@ public class PessoaResource {
 		Pessoa obj = this.service.findById(id);
 		return ResponseEntity.ok().body(new PessoaDTO(obj)); 
 	}
-	
+
+	@GetMapping
+	public ResponseEntity<List<PessoaDTO>> findAll(){
+		List<Pessoa> list = service.findAll();
+		List<PessoaDTO> listDTO = list.stream().map(obj -> new PessoaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
+	}
 
 }
