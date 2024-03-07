@@ -15,6 +15,8 @@ public class PessoaDTO implements Serializable {
 	private Integer id;
 	@NotNull(message = "O Campo NOME é Requerido")
 	private String nome;
+	
+	@JsonFormat(pattern = "###.###.###-##")	
 	@NotNull(message = "O Campo CPF é Requerido")
 	private String cpf;
 	@NotNull(message = "O Campo EMAIL é Requerido")
@@ -27,8 +29,8 @@ public class PessoaDTO implements Serializable {
 	
 	public PessoaDTO() {
 		super();
-	}
-
+	} 
+ 
 	public PessoaDTO(Pessoa obj) {
 		super();
 		this.id = obj.getId();
@@ -61,7 +63,16 @@ public class PessoaDTO implements Serializable {
 	}
 
 	public void setCpf(String cpf) {
-		this.cpf = cpf;
+		 // Remover caracteres não numéricos do CPF
+        cpf = cpf.replaceAll("[^0-9]", "");
+
+        // Formatar o CPF
+        StringBuilder cpfFormatado = new StringBuilder(cpf);
+        cpfFormatado.insert(3, '.');
+        cpfFormatado.insert(7, '.');
+        cpfFormatado.insert(11, '-');
+
+        this.cpf = cpfFormatado.toString();
 	}
 
 	public String getEmail() {
