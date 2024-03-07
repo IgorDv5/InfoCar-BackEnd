@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.igor.car.domain.dtos.CarroDTO;
+
 @Entity
 public class Carro implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -43,7 +45,18 @@ public class Carro implements Serializable {
 		this.cavalaria = cavalaria;
 		this.placa = placa;
 	}
-
+	
+	public Carro(CarroDTO obj) {
+		super();
+		this.id = obj.getId();
+		this.marca = obj.getMarca();
+		this.modelo = obj.getModelo();
+		this.anoFabricacao = obj.getAnoFabricacao();
+		this.chassi = obj.getChassi();
+		this.cavalaria = obj.getCavalaria();
+		this.placa = obj.getPlaca();
+	
+	}
 
 
 	public Integer getId() {

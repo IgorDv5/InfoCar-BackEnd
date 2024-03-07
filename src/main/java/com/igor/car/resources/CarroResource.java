@@ -1,5 +1,6 @@
 package com.igor.car.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -7,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.igor.car.domain.Carro;
 import com.igor.car.domain.dtos.CarroDTO;
@@ -33,6 +37,13 @@ public class CarroResource {
 		List<CarroDTO> listDTO = list.stream().map(obj -> new CarroDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDTO);
 		
+	}
+	
+	@PostMapping
+	public ResponseEntity<CarroDTO> create(@RequestBody CarroDTO objDTO){
+		Carro newObj = service.create(objDTO);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 	
 }
