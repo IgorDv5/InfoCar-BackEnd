@@ -3,6 +3,9 @@ package com.igor.car.domain.dtos;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.igor.car.domain.Pessoa;
 
 public class PessoaDTO implements Serializable {
@@ -10,10 +13,15 @@ public class PessoaDTO implements Serializable {
 	
 	
 	private Integer id;
+	@NotNull(message = "O Campo NOME é Requerido")
 	private String nome;
+	@NotNull(message = "O Campo CPF é Requerido")
 	private String cpf;
+	@NotNull(message = "O Campo EMAIL é Requerido")
 	private String email;
+	@NotNull(message = "O Campo SENHA é Requerido")
 	private String senha;
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dataNascimento;
 	private String funcao;
 	

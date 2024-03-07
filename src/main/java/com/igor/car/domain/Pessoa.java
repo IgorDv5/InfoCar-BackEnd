@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.igor.car.domain.dtos.PessoaDTO;
 
 @Entity
@@ -22,6 +24,7 @@ public class Pessoa implements Serializable {
 	private String nome;
 	
 	@Column(unique=true) //Anotacao para informar que é unica no banco
+	@CPF
 	private String cpf;
 	
 	@Column(unique=true) //Anotacao para informar que é unica no banco
