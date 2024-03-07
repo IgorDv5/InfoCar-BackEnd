@@ -3,6 +3,8 @@ package com.igor.car.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,14 @@ public class PessoaService {
 		Pessoa newObj = new Pessoa(objDTO); 
 		return repository.save(newObj);
 	}
+	
+	public Pessoa update(Integer id, @Valid PessoaDTO objDTO) {
+		objDTO.setId(id);
+		Pessoa oldObj = findById(id);
+		validaPorCpfeEmail(objDTO);
+		oldObj = new Pessoa(objDTO);
+		return repository.save(oldObj);
+	}
 
 	private void validaPorCpfeEmail(PessoaDTO objDTO) {
 		Optional<Pessoa> obj = repository.findByCpf(objDTO.getCpf());
@@ -49,8 +59,5 @@ public class PessoaService {
 			
 
 	}
-
-
-	
 	
 }
