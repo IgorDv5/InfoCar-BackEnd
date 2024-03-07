@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.igor.car.domain.Pessoa;
 import com.igor.car.repositories.PessoaRepository;
+import com.igor.car.services.exceptions.ObjectNotFoundException;
 
 
 
@@ -18,7 +19,7 @@ public class PessoaService {
 	
 	public Pessoa findById(Integer id) {
 		Optional<Pessoa> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto Não Encontrado! Id: "+ id));
 	}
 	
 }
