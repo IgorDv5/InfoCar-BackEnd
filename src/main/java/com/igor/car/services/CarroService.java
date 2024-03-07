@@ -1,5 +1,6 @@
 package com.igor.car.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class CarroService {
 	public Carro findById(Integer id) {
 		Optional<Carro> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto Não Encontrado! Id: " + id));
+	}
+
+	public List<Carro> findAll() {
+		return repository.findAll();
 	}
 	
 	 
