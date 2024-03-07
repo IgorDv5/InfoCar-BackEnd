@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.igor.car.domain.dtos.PessoaDTO;
+
 @Entity
 public class Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -42,6 +44,17 @@ public class Pessoa implements Serializable {
 		this.senha = senha;
 		this.dataNascimento = dataNascimento;
 		this.funcao = funcao;
+	}
+	
+	public Pessoa(PessoaDTO obj) {
+		super();
+		this.id = obj.getId();
+		this.nome = obj.getNome();
+		this.cpf = obj.getCpf();
+		this.email = obj.getEmail();
+		this.senha = obj.getSenha();
+		this.dataNascimento = obj.getDataNascimento();
+		this.funcao = obj.getFuncao();
 	}
 
 	@Override

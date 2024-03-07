@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.igor.car.domain.Pessoa;
+import com.igor.car.domain.dtos.PessoaDTO;
 import com.igor.car.repositories.PessoaRepository;
 import com.igor.car.services.exceptions.ObjectNotFoundException;
 
@@ -26,6 +27,13 @@ public class PessoaService {
 	public List<Pessoa> findAll() {
 		return repository.findAll();
 	}
+
+	public Pessoa create(PessoaDTO objDTO) {
+		objDTO.setId(null); 
+		Pessoa newObj = new Pessoa(objDTO); 
+		return repository.save(newObj);
+	}
+
 
 	
 	
