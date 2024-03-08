@@ -2,18 +2,26 @@ package com.igor.car.domain.dtos;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+
 import com.igor.car.domain.Carro;
 
 public class CarroDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	@NotNull(message= "O Campo MARCA é Requerido")
 	private String marca;
+	@NotNull(message= "O Campo MODELO é Requerido")
 	private String modelo;
+	@NotNull(message= "O Campo AnoDeFabricação é Requerido")
 	private int anoFabricacao;
+	@NotNull(message= "O Campo Chassi é Requerido")
 	private String chassi;
+	@NotNull(message= "O Campo Cavalaria é Requerido")
 	private String cavalaria;
-	private String placa;
+	@NotNull(message= "O Campo Placa é Requerido")
+	private String placa; 
 	
 	public CarroDTO() {
 		super();
