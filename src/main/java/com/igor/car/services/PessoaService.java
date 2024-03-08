@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.igor.car.domain.Pessoa;
@@ -19,6 +20,8 @@ public class PessoaService {
 
 	@Autowired
 	private PessoaRepository repository;
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	public Pessoa findById(Integer id) {
 		Optional<Pessoa> obj = repository.findById(id);
@@ -31,6 +34,7 @@ public class PessoaService {
 
 	public Pessoa create(PessoaDTO objDTO) {
 		objDTO.setId(null);
+		objDTO.setSenha(encoder.encode(objDTO.getSenha()));
 		validaPorCpfeEmail(objDTO);
 		Pessoa newObj = new Pessoa(objDTO);
 		return repository.save(newObj);
@@ -38,6 +42,7 @@ public class PessoaService {
 
 	public Pessoa update(Integer id, @Valid PessoaDTO objDTO) {
 		objDTO.setId(id);
+		objDTO.setSenha(encoder.encode(objDTO.getSenha()));
 		Pessoa oldObj = findById(id);
 		validaPorCpfeEmail(objDTO);
 		oldObj = new Pessoa(objDTO);

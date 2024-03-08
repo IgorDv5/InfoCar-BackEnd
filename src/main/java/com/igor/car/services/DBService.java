@@ -3,6 +3,7 @@ package com.igor.car.services;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.igor.car.domain.Carro;
@@ -13,22 +14,23 @@ import com.igor.car.repositories.PessoaRepository;
 @Service
 public class DBService {
 
-	@Autowired
+	@Autowired 
 	private PessoaRepository pessoaRepository;
 	@Autowired
 	private CarroRepository carroRepository;
+	@Autowired BCryptPasswordEncoder encoder;
 	
-	public void instaciaDB() {
+	public void instaciaDB() {      
 		//Instacia de Pessoas
-				Pessoa p1 = new Pessoa(1, "Igor Dantas", "519.836.359-60", "igor@gmail.com", "123", null, "Administrador");
-				Pessoa p2 = new Pessoa(2, "Marcos Alonso", "827.579.799-30", "Marcos@gmail.com", "123", null, "Cliente");
-				Pessoa p3 = new Pessoa(3, "Roberto Ferreira", "324.000.656-16", "Roberto@gmail.com", "123", null, "Cliente");
-				Pessoa p4 = new Pessoa(4, "Latencio Sousa", "737.003.845-99", "Latencio@gmail.com", "123", null, "Cliente");
-				Pessoa p5 = new Pessoa(5, "Lucas Torres", "741.536.295-02", "Lucas@gmail.com", "123", null, "Cliente");
-				Pessoa p6 = new Pessoa(6, "Adriano Vasquz", "539.586.471-70", "Adriano@gmail.com", "123", null, "Vendedor");
-				Pessoa p7 = new Pessoa(7, "Luiz de sousa", "205.883.842-40", "Luiz@gmail.com", "123", null, "Vendedor");
-				Pessoa p8 = new Pessoa(8, "Thomas Turbando", "925.781.607-91", "Thomas@gmail.com", "123", null, "Vendedor");
-				Pessoa p9 = new Pessoa(9, "Paula Tejando", "359.107.789-51", "Paula@gmail.com", "123", null, "Vendedor");
+				Pessoa p1 = new Pessoa(1, "Igor Dantas", "519.836.359-60", "igor@gmail.com", encoder.encode("123"), null, "Administrador");
+				Pessoa p2 = new Pessoa(2, "Marcos Alonso", "827.579.799-30", "Marcos@gmail.com", encoder.encode("123"), null, "Cliente");
+				Pessoa p3 = new Pessoa(3, "Roberto Ferreira", "324.000.656-16", "Roberto@gmail.com", encoder.encode("123"), null, "Cliente");
+				Pessoa p4 = new Pessoa(4, "Latencio Sousa", "737.003.845-99", "Latencio@gmail.com", encoder.encode("123"), null, "Cliente");
+				Pessoa p5 = new Pessoa(5, "Lucas Torres", "741.536.295-02", "Lucas@gmail.com", encoder.encode("123"), null, "Cliente");
+				Pessoa p6 = new Pessoa(6, "Adriano Vasquz", "539.586.471-70", "Adriano@gmail.com", encoder.encode("123"), null, "Vendedor");
+				Pessoa p7 = new Pessoa(7, "Luiz de sousa", "205.883.842-40", "Luiz@gmail.com", encoder.encode("123"), null, "Vendedor");
+				Pessoa p8 = new Pessoa(8, "Thomas Turbando", "925.781.607-91", "Thomas@gmail.com", encoder.encode("123"), null, "Vendedor");
+				Pessoa p9 = new Pessoa(9, "Paula Tejando", "359.107.789-51", "Paula@gmail.com", encoder.encode("123"), null, "Vendedor");
 				
 				//Instacia de Veiculos
 				Carro c1 = new Carro(1, "Ford", "Ka", 2010, "4Zu AL61j6 7z w45140", "85", "JIN-3247");
