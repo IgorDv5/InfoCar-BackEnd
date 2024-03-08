@@ -3,6 +3,8 @@ package com.igor.car.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +48,19 @@ public class CarroService {
 			throw new DataIntegrityViolationException("Chassi Já Cadastrado No Sistema!");
 		} 
 	}
+
+	public Carro update(Integer id, @Valid CarroDTO objDTO) {
+		objDTO.setId(id);
+		Carro oldObj = findById(id);
+		validaPorPlacaeChassi(objDTO);
+		oldObj = new Carro(objDTO);
+		return repository.save(oldObj);
+	}
+
+	public void delete(Integer id) {
+		repository.deleteById(id);
+	}
+
 	
 
 }
